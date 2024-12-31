@@ -313,15 +313,14 @@ function ProductList() {
 
   const handleCartClick = (e) => {
     e.preventDefault();
-    setShowCart(true);
-    setShowPlants(false);
-  };
+    setShowCart(true); // Set showCart to true when cart icon is clicked
+};
 
-  const handlePlantsClick = (e) => {
-    e.preventDefault();
-    setShowPlants(true);
-    setShowCart(false);
-  };
+    const handlePlantsClick = (e) => {
+        e.preventDefault();
+        setShowPlants(true); // Set showAboutUs to true when "About Us" link is clicked
+        setShowCart(false); // Hide the cart when navigating to About Us
+    };
 
   const handleContinueShopping = (e) => {
     e.preventDefault();
@@ -394,7 +393,7 @@ return (
           </div>
           <div>
             <a href="#" onClick={handleCartClick} style={styleA}>
-              <div className="cart-container">
+              <h1 className="cart">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   viewBox="0 0 256 256"
@@ -419,7 +418,7 @@ return (
                 {totalItemsInCart > 0 && (
                   <span className="item-count">{totalItemsInCart}</span>
                 )}
-              </div>
+              </h1>
             </a>
           </div>
         </div>
