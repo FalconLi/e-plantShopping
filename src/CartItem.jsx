@@ -5,6 +5,11 @@ import './CartItem.css';
 
 const CartItem = ({ onContinueShopping , onRemoveFromCart }) => {
 
+  const [showComingSoon, setShowComingSoon] = useState(false);
+  const handleCheckoutClick = () => {
+    setShowComingSoon(true);
+  };
+
   const cart = useSelector((state) => state.cart.items);
   const dispatch = useDispatch();
 
@@ -15,10 +20,6 @@ const CartItem = ({ onContinueShopping , onRemoveFromCart }) => {
     }, 0).toFixed(2);
   };
 
-  const handleContinueShopping = (e) => {
-   onContinueShopping(e);
-  };
-  
   const handleIncrement = (item) => {
     dispatch(updateQuantity({ name: item.name, quantity: item.quantity + 1 }));
   };
@@ -31,14 +32,11 @@ const CartItem = ({ onContinueShopping , onRemoveFromCart }) => {
 
   const handleRemove = (item) => {
     dispatch(removeItem(item));
+    onRemoveFromCart(item);
   };
 
   const calculateTotalCost = (item) => {
     return (item.quantity * parseFloat(item.cost.slice(1))).toFixed(2);
-  };
-
-  const handleCheckoutShopping = (e) => {
-    alert('Functionality to be added for future reference');
   };
 
   return (showComingSoon ? <h1 className='center-checkout-message'>Coming soon</h1>
@@ -80,10 +78,10 @@ const CartItem = ({ onContinueShopping , onRemoveFromCart }) => {
         ))}
       </div>
       <div style={{ marginTop: '20px', color: 'black' }} className="total_cart_amount"></div>
-      <button className="product-button" onClick={(e) => handleContinueShopping(e)}>
+      <button className="product-button" onClick={onContinueShopping}>
         Continue Shopping
       </button>
-      <button className="product-button" onClick={(e) => handleCheckoutShopping(e)} >
+      <button className="product-button" onClick={handleCheckoutClick} >
         Checkout
       </button>
     </div>
